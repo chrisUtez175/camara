@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Demo</title>
+    <meta name="theme-color" content="#4CAF50">
+    </head>
+<body>
+
+    <h1>Demostración de Cámara Web</h1>
+    
+    <button id="openCamera">Activar Cámara</button>
+
+    <hr>
+    
+    <div id="cameraContainer" style="display: none;"> 
+        
+        <h2>Vista Previa en Vivo</h2>
+        
+        <video id="video" autoplay playsinline></video>
+        
+        <button id="takePhoto">Capturar Foto</button>
+
+    </div>
+
+    <hr>
+
+    <div id="canvasContainer" style="display: none;">
+        <h2>Imagen Capturada</h2>
+        <canvas id="canvas"></canvas>
+        <a id="downloadLink" download="mi_foto.png" style="display: none;">Descargar Imagen</a>
+    </div>
+    <script src="./app.js"></script>
+    </body>
+</html>
