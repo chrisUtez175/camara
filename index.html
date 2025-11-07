@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cámara PWA</title>
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#000000">
     <style>
         body {
@@ -18,7 +18,7 @@
         }
         button {
             padding: 10px 20px;
-            margin: 10px;
+            margin: 10px 5px; /* Ajuste de margen para botones */
             font-size: 16px;
             cursor: pointer;
             border: none;
@@ -55,14 +55,10 @@
             margin-bottom: 10px;
         }
         canvas {
-            display: none; /* Inicialmente oculto */
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 10px;
-            background-color: #eee;
+            display: none; /* Se usará para captura, no para visualización directa */
         }
         #photoGallery {
-            margin-top: 30px;
+            margin-top: 20px;
             width: 100%;
             max-width: 600px;
             overflow-x: auto;
@@ -72,13 +68,14 @@
             border-radius: 8px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: left;
         }
         .gallery-item {
             display: inline-block; /* Permite que las imágenes estén en línea */
             margin-right: 10px;
             width: 120px; /* Tamaño fijo para las miniaturas */
             height: 90px;
-            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            object-fit: cover; 
             border: 1px solid #eee;
             border-radius: 4px;
         }
@@ -99,11 +96,26 @@
     </div>
 
     <h2>Galería de Fotos</h2>
+    <button id="clearGalleryButton" style="background-color: #dc3545;">Limpiar Galería</button> 
+    
     <div id="photoGallery">
         <p id="noPhotosMessage">No hay fotos aún. ¡Toma una!</p>
     </div>
 
-    <script src="app.js"></script>
-
+    <script src="./app.js"></script>
+    <script>
+        // Registro del Service Worker (Asumimos que sw.js existe)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Fallo el registro del Service Worker:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
