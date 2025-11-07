@@ -3,34 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webcam Demo</title>
-    <meta name="theme-color" content="#4CAF50">
-    </head>
+    <title>Cámara PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #cameraContainer {
+            margin-top: 20px;
+            display: none; /* Inicialmente oculto */
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        video {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #000;
+            margin-bottom: 10px;
+        }
+        canvas {
+            display: none; /* Inicialmente oculto */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #eee;
+        }
+        #photoGallery {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 600px;
+            overflow-x: auto;
+            white-space: nowrap; /* Mantiene las imágenes en una sola línea */
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .gallery-item {
+            display: inline-block; /* Permite que las imágenes estén en línea */
+            margin-right: 10px;
+            width: 120px; /* Tamaño fijo para las miniaturas */
+            height: 90px;
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+    </style>
+</head>
 <body>
+    <h1>Cámara PWA</h1>
 
-    <h1>Demostración de Cámara Web</h1>
-    
-    <button id="openCamera">Activar Cámara</button>
+    <button id="openCamera">Abrir Cámara</button>
 
-    <hr>
-    
-    <div id="cameraContainer" style="display: none;"> 
-        
-        <h2>Vista Previa en Vivo</h2>
-        
+    <div id="cameraContainer">
         <video id="video" autoplay playsinline></video>
-        
-        <button id="takePhoto">Capturar Foto</button>
-
-    </div>
-
-    <hr>
-
-    <div id="canvasContainer" style="display: none;">
-        <h2>Imagen Capturada</h2>
+        <div>
+            <button id="takePhoto">Tomar Foto</button>
+            <button id="toggleCameraButton">Cambiar Cámara</button>
+        </div>
         <canvas id="canvas"></canvas>
-        <a id="downloadLink" download="mi_foto.png" style="display: none;">Descargar Imagen</a>
     </div>
-    <script src="./app.js"></script>
-    </body>
+
+    <h2>Galería de Fotos</h2>
+    <div id="photoGallery">
+        <p id="noPhotosMessage">No hay fotos aún. ¡Toma una!</p>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
 </html>
