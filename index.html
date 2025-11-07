@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cámara PWA</title>
-    <link rel="manifest" href="./manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <style>
         body {
@@ -18,7 +18,7 @@
         }
         button {
             padding: 10px 20px;
-            margin: 10px 5px; /* Ajuste de margen para botones */
+            margin: 10px 5px; 
             font-size: 16px;
             cursor: pointer;
             border: none;
@@ -45,6 +45,11 @@
             background-color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        #cameraControls {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
         video {
             width: 100%;
             max-width: 320px;
@@ -55,14 +60,14 @@
             margin-bottom: 10px;
         }
         canvas {
-            display: none; /* Se usará para captura, no para visualización directa */
+            display: none; /* Se usa para la captura, no se muestra */
         }
         #photoGallery {
             margin-top: 20px;
             width: 100%;
             max-width: 600px;
-            overflow-x: auto;
-            white-space: nowrap; /* Mantiene las imágenes en una sola línea */
+            overflow-x: auto; /* Habilita el scroll horizontal */
+            white-space: nowrap; /* Mantiene las imágenes en línea */
             border: 1px solid #ccc;
             padding: 10px;
             border-radius: 8px;
@@ -71,11 +76,11 @@
             text-align: left;
         }
         .gallery-item {
-            display: inline-block; /* Permite que las imágenes estén en línea */
+            display: inline-block;
             margin-right: 10px;
-            width: 120px; /* Tamaño fijo para las miniaturas */
+            width: 120px; 
             height: 90px;
-            object-fit: cover; 
+            object-fit: cover; /* Recorta la imagen para cubrir el área */
             border: 1px solid #eee;
             border-radius: 4px;
         }
@@ -88,7 +93,7 @@
 
     <div id="cameraContainer">
         <video id="video" autoplay playsinline></video>
-        <div>
+        <div id="cameraControls">
             <button id="takePhoto">Tomar Foto</button>
             <button id="toggleCameraButton">Cambiar Cámara</button>
         </div>
@@ -102,12 +107,13 @@
         <p id="noPhotosMessage">No hay fotos aún. ¡Toma una!</p>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="app.js"></script>
     <script>
-        // Registro del Service Worker (Asumimos que sw.js existe)
+        // Registro del Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('./sw.js')
+
+                navigator.serviceWorker.register('./sw.js') 
                     .then(registration => {
                         console.log('Service Worker registrado con éxito:', registration);
                     })
